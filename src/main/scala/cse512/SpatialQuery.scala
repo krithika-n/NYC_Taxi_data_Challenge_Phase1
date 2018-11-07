@@ -80,21 +80,23 @@ object SpatialQuery extends App{
           var pt_y=pt_array(1).trim.toDouble
           
           
-          var min_x = 0.0
-          var max_x = 0.0
+          // var min_x = 0.0
+          // var max_x = 0.0
 
-          if(r_x1 > r_x2)
-          {
-            max_x = r_x1
-            min_x = r_x2
-          }
+          // if(r_x1 > r_x2)
+          // {
+          //   max_x = r_x1
+          //   min_x = r_x2
+          // }
 
-          else
-          {
-            max_x = r_x2
-            min_x = r_x1
-          }
-
+          // else
+          // {
+          //   max_x = r_x2
+          //   min_x = r_x1
+          // }
+          var min_x = math.min(r_x1, r_x2)
+          var max_x = math.max(r_x1, r_x2)
+          
           var min_y = math.min(r_y1, r_y2)
           var max_y = math.max(r_y1, r_y2)
           
