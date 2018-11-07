@@ -66,6 +66,12 @@ object SpatialQuery extends App{
   }
 
   def Contains_function(queryRectangle:String, pointString:String):Boolean={
+    /** Returns true if pointString1 lies inside or on hte boundary of queryRectangle
+      *
+      *@param queryRectangle diagonal point co-ordinates of the rectangle
+      *@param pointString x and y co-ordinates of the point
+      *@return true if point is contained within the rectangle
+      */
     try {
           var rect_array = new Array[String](4)
           rect_array = queryRectangle.split(",")
@@ -80,20 +86,22 @@ object SpatialQuery extends App{
           var pt_y=pt_array(1).trim.toDouble
           
           
-          var min_x = 0.0
-          var max_x = 0.0
+          // var min_x = 0.0
+          // var max_x = 0.0
 
-          if(r_x1 > r_x2)
-          {
-            max_x = r_x1
-            min_x = r_x2
-          }
+          // if(r_x1 > r_x2)
+          // {
+          //   max_x = r_x1
+          //   min_x = r_x2
+          // }
 
-          else
-          {
-            max_x = r_x2
-            min_x = r_x1
-          }
+          // else
+          // {
+          //   max_x = r_x2
+          //   min_x = r_x1
+          // }
+          var min_x=math.min(r_x1,r_x2)
+          var max_x=math.max(r_x1,r_x2)
 
           var min_y = math.min(r_y1, r_y2)
           var max_y = math.max(r_y1, r_y2)
@@ -109,6 +117,12 @@ object SpatialQuery extends App{
   }
 
   def Within_function(pointString1:String, pointString2:String, distance:Double):Boolean={
+    /** Returns true if the euclidean distance between pointString1 and pointString2 is <= distance
+      *
+      *@param pointString1 diagonal point co-ordinates of the rectangle
+      *@param pointString x and y co-ordinates of the point
+      *@return true if point is contained within the rectangle
+      */
     try {
           var pt1_array = new Array[String](2)
           pt1_array = pointString1.split(",")
