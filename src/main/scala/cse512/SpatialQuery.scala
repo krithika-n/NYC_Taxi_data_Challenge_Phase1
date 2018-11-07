@@ -111,6 +111,12 @@ object SpatialQuery extends App{
   }
 
   def Within_function(pointString1:String, pointString2:String, distance:Double):Boolean={
+    /** Returns true if the euclidean distance between pointString1 and pointString2 is <= distance
+     *
+     *@param pointString1 diagonal point co-ordinates of the rectangle
+     *@param pointString x and y co-ordinates of the point
+     *@return true if distance between points is <= given distance
+     */
     try {
           var pt1_array = new Array[String](2)
           pt1_array = pointString1.split(",")
