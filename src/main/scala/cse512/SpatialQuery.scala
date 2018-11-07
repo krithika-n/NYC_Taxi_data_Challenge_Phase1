@@ -73,8 +73,8 @@ object SpatialQuery extends App{
       *@return true if point is contained within the rectangle
       */
     try {
-          var rect_array = new Array[String](4)
-          rect_array = queryRectangle.split(",")
+          // var rect_array = new Array[String](4)
+          val rect_array = queryRectangle.split(",")
           val r_x1 = rect_array(0).trim.toDouble
           val r_y1 = rect_array(1).trim.toDouble
           val r_x2 = rect_array(2).trim.toDouble
@@ -110,8 +110,8 @@ object SpatialQuery extends App{
       *@return true if distance between points is <= given distance
       */
     try {
-          var pt1_array = new Array[String](2)
-          pt1_array = pointString1.split(",")
+          // var pt1_array = new Array[String](2)
+          val pt1_array = pointString1.split(",")
 
           val pt1_x= pt1_array(0).trim.toDouble
           val pt1_y= pt1_array(1).trim.toDouble
@@ -122,7 +122,6 @@ object SpatialQuery extends App{
           val pt2_x=pt2_array(0).trim.toDouble
           val pt2_y=pt2_array(1).trim.toDouble
           
-         
           val calc_Distance = Math.sqrt(Math.pow((pt1_x - pt2_x), 2) + Math.pow((pt1_y - pt2_y), 2))
           
           if(calc_Distance <= distance)
