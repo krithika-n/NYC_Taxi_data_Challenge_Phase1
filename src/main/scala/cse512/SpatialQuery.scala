@@ -75,36 +75,22 @@ object SpatialQuery extends App{
     try {
           var rect_array = new Array[String](4)
           rect_array = queryRectangle.split(",")
-          var r_x1 = rect_array(0).trim.toDouble
-          var r_y1 = rect_array(1).trim.toDouble
-          var r_x2 = rect_array(2).trim.toDouble
-          var r_y2 = rect_array(3).trim.toDouble
+          val r_x1 = rect_array(0).trim.toDouble
+          val r_y1 = rect_array(1).trim.toDouble
+          val r_x2 = rect_array(2).trim.toDouble
+          val r_y2 = rect_array(3).trim.toDouble
             
           var pt_array = new Array[String](2)
           pt_array= pointString.split(",")          
-          var pt_x=pt_array(0).trim.toDouble
-          var pt_y=pt_array(1).trim.toDouble
+          val pt_x=pt_array(0).trim.toDouble
+          val pt_y=pt_array(1).trim.toDouble
           
           
-          // var min_x = 0.0
-          // var max_x = 0.0
+          val min_x=math.min(r_x1,r_x2)
+          val max_x=math.max(r_x1,r_x2)
 
-          // if(r_x1 > r_x2)
-          // {
-          //   max_x = r_x1
-          //   min_x = r_x2
-          // }
-
-          // else
-          // {
-          //   max_x = r_x2
-          //   min_x = r_x1
-          // }
-          var min_x=math.min(r_x1,r_x2)
-          var max_x=math.max(r_x1,r_x2)
-
-          var min_y = math.min(r_y1, r_y2)
-          var max_y = math.max(r_y1, r_y2)
+          val min_y = math.min(r_y1, r_y2)
+          val max_y = math.max(r_y1, r_y2)
           
           if(pt_y > max_y || pt_y < min_y || pt_x > max_x || pt_x < min_x)
             return false
@@ -121,23 +107,23 @@ object SpatialQuery extends App{
       *
       *@param pointString1 diagonal point co-ordinates of the rectangle
       *@param pointString x and y co-ordinates of the point
-      *@return true if point is contained within the rectangle
+      *@return true if distance between points is <= given distance
       */
     try {
           var pt1_array = new Array[String](2)
           pt1_array = pointString1.split(",")
 
-          var pt1_x= pt1_array(0).trim.toDouble
-          var pt1_y= pt1_array(1).trim.toDouble
-        
+          val pt1_x= pt1_array(0).trim.toDouble
+          val pt1_y= pt1_array(1).trim.toDouble
+      
           var pt2_array = new Array[String](2)
           pt2_array = pointString2.split(",")
 
-          var pt2_x=pt2_array(0).trim.toDouble
-          var pt2_y=pt2_array(1).trim.toDouble
+          val pt2_x=pt2_array(0).trim.toDouble
+          val pt2_y=pt2_array(1).trim.toDouble
           
          
-          var calc_Distance = Math.sqrt(Math.pow((pt1_x - pt2_x), 2) + Math.pow((pt1_y - pt2_y), 2))
+          val calc_Distance = Math.sqrt(Math.pow((pt1_x - pt2_x), 2) + Math.pow((pt1_y - pt2_y), 2))
           
           if(calc_Distance <= distance)
             return true 
