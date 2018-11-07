@@ -6,37 +6,38 @@ object SpatialQuery extends App{
 
   def Contains(queryRectangle:String, pointString:String):Boolean={
     try {
-          var rect = new Array[String](4)
-          rect = queryRectangle.split(",")
-          var rect_x1 = rect(0).trim.toDouble
-          var rect_y1 = rect(1).trim.toDouble
-          var rect_x2 = rect(2).trim.toDouble
-          var rect_y2 = rect(3).trim.toDouble
+          var rect_array = new Array[String](4)
+          rect_array = queryRectangle.split(",")
+          var r_x1 = rect_array(0).trim.toDouble
+          var r_y1 = rect_array(1).trim.toDouble
+          var r_x2 = rect_array(2).trim.toDouble
+          var r_y2 = rect_array(3).trim.toDouble
             
-          var point = new Array[String](2)
-          point= pointString.split(",")          
-          var point_x=point(0).trim.toDouble
-          var point_y=point(1).trim.toDouble
+          var pt_array = new Array[String](2)
+          pt_array= pointString.split(",")          
+          var pt_x=pt_array(0).trim.toDouble
+          var pt_y=pt_array(1).trim.toDouble
           
+          
+          var min_x = 0.0
+          var max_x = 0.0
 
-          var lower_x =0.0
-          var higher_x =0.0
-          
-          if (rect_x1 < rect_x2)
+          if(r_x1 > r_x2)
           {
-            lower_x = rect_x1
-            higher_x = rect_x2
+            max_x = r_x1
+            min_x = r_x2
           }
+
           else
           {
-            lower_x = rect_x2
-            higher_x = rect_x1
+            max_x = r_x2
+            min_x = r_x1
           }
           
-          var lower_y = math.min(rect_y1, rect_y2)
-          var higher_y = math.max(rect_y1, rect_y2)
+          var min_y = math.min(r_y1, r_y2)
+          var max_y = math.max(r_y1, r_y2)
           
-          if(point_y > higher_y || point_x < lower_x || point_x>higher_x || point_y < lower_y)
+          if(pt_y > max_y || pt_y < min_y || pt_x > max_x || pt_x < min_x)
             return false
           else
             return true
@@ -72,7 +73,7 @@ object SpatialQuery extends App{
             case _: Throwable => return false
         }
   }
-  
+
   def runRangeQuery(spark: SparkSession, arg1: String, arg2: String): Long = {
 
     val pointDf = spark.read.format("com.databricks.spark.csv").option("delimiter","\t").option("header","false").load(arg1);
