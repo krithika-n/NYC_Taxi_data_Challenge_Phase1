@@ -74,13 +74,19 @@ object SpatialQuery extends App{
       */
     try {
           val rect_array = queryRectangle.split(",").map(x=>x.trim.toDouble)
-          val pt_array= pointString.split(",").map(x=>x.trim.toDouble)         
-          
-          val min_x=math.min(rect_array(0),rect_array(2))
-          val max_x=math.max(rect_array(1),rect_array(3))
+          val pt_array= pointString.split(",").map(x=>x.trim.toDouble) 
 
-          val min_y = math.min(r_y1, r_y2)
-          val max_y = math.max(r_y1, r_y2)
+          def min_y(arr:Array[Double]):Double = (arr.indices.collect { case i if i % 2 == 1 => arr(i) }).min
+          def min_x(arr:Array[Double]):Double = (arr.indices.collect { case i if i % 2 == 0 => arr(i) }).min
+          def max_y(arr:Array[Double]):Double = (arr.indices.collect { case i if i % 2 == 1 => arr(i) }).max
+          def max_x(arr:Array[Double]):Double = (arr.indices.collect { case i if i % 2 == 0 => arr(i) }).max
+        
+          
+          val min_x=min_x(rect_array)
+          val max_x=max_x(rect_array)
+
+          val min_y = min_y(rect_array)
+          val max_y = max_y(rect_array)
           
           if(pt_array(1) > max_y || pt_array(1) < min_y || pt_array(0) > max_x || pt_array(0) < min_x)
             return false
