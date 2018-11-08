@@ -66,41 +66,23 @@ object SpatialQuery extends App{
   }
 
   def Contains_function(queryRectangle:String, pointString:String):Boolean={
+    /** Returns true if pointString1 lies inside or on hte boundary of queryRectangle
+      *
+      *@param queryRectangle diagonal point co-ordinates of the rectangle
+      *@param pointString x and y co-ordinates of the point
+      *@return true if point is contained within the rectangle
+      */
     try {
-          var rect_array = new Array[String](4)
-          rect_array = queryRectangle.split(",")
-          var r_x1 = rect_array(0).trim.toDouble
-          var r_y1 = rect_array(1).trim.toDouble
-          var r_x2 = rect_array(2).trim.toDouble
-          var r_y2 = rect_array(3).trim.toDouble
-            
-          var pt_array = new Array[String](2)
-          pt_array= pointString.split(",")          
-          var pt_x=pt_array(0).trim.toDouble
-          var pt_y=pt_array(1).trim.toDouble
+          val rect_array = queryRectangle.split(",").map(x=>x.trim.toDouble)
+          val pt_array= pointString.split(",").map(x=>x.trim.toDouble)         
           
-          
-          // var min_x = 0.0
-          // var max_x = 0.0
+          val min_x=math.min(rect_array(0),rect_array(2))
+          val max_x=math.max(rect_array(1),rect_array(3))
 
-          // if(r_x1 > r_x2)
-          // {
-          //   max_x = r_x1
-          //   min_x = r_x2
-          // }
-
-          // else
-          // {
-          //   max_x = r_x2
-          //   min_x = r_x1
-          // }
-          var min_x = math.min(r_x1, r_x2)
-          var max_x = math.max(r_x1, r_x2)
+          val min_y = math.min(r_y1, r_y2)
+          val max_y = math.max(r_y1, r_y2)
           
-          var min_y = math.min(r_y1, r_y2)
-          var max_y = math.max(r_y1, r_y2)
-          
-          if(pt_y > max_y || pt_y < min_y || pt_x > max_x || pt_x < min_x)
+          if(pt_array(1) > max_y || pt_array(1) < min_y || pt_array(0) > max_x || pt_array(0) < min_x)
             return false
           else
             return true
@@ -112,26 +94,16 @@ object SpatialQuery extends App{
 
   def Within_function(pointString1:String, pointString2:String, distance:Double):Boolean={
     /** Returns true if the euclidean distance between pointString1 and pointString2 is <= distance
-     *
-     *@param pointString1 diagonal point co-ordinates of the rectangle
-     *@param pointString x and y co-ordinates of the point
-     *@return true if distance between points is <= given distance
-     */
+      *
+      *@param pointString1 diagonal point co-ordinates of the rectangle
+      *@param pointString x and y co-ordinates of the point
+      *@return true if distance between points is <= given distance
+      */
     try {
-          var pt1_array = new Array[String](2)
-          pt1_array = pointString1.split(",")
-
-          var pt1_x= pt1_array(0).trim.toDouble
-          var pt1_y= pt1_array(1).trim.toDouble
-        
-          var pt2_array = new Array[String](2)
-          pt2_array = pointString2.split(",")
-
-          var pt2_x=pt2_array(0).trim.toDouble
-          var pt2_y=pt2_array(1).trim.toDouble
+          val pt1 = pointString1.split(",").map(x=>x.trim.toDouble)
+          val pt2 = pointString2.split(",").map(x=>x.trim.toDouble)
           
-         
-          var calc_Distance = Math.sqrt(Math.pow((pt1_x - pt2_x), 2) + Math.pow((pt1_y - pt2_y), 2))
+          val calc_Distance = Math.sqrt(Math.pow((pt1(0) - pt2(0)), 2) + Math.pow((pt1(1) - pt2(1)), 2))
           
           if(calc_Distance <= distance)
             return true 
