@@ -79,9 +79,9 @@ object SpatialQuery extends App{
           val r_x2 = rect_array(2).trim.toDouble
           val r_y2 = rect_array(3).trim.toDouble
                       
-          val pt_array= pointString.split(",")          
-          val pt_x=pt_array(0).trim.toDouble
-          val pt_y=pt_array(1).trim.toDouble
+          val pt_array= pointString.split(",").map(x=>x.trim.toDouble)         
+          // val pt_x=pt_array(0).trim.toDouble
+          // val pt_y=pt_array(1).trim.toDouble
           
           val min_x=math.min(r_x1,r_x2)
           val max_x=math.max(r_x1,r_x2)
@@ -89,7 +89,7 @@ object SpatialQuery extends App{
           val min_y = math.min(r_y1, r_y2)
           val max_y = math.max(r_y1, r_y2)
           
-          if(pt_y > max_y || pt_y < min_y || pt_x > max_x || pt_x < min_x)
+          if(pt_array(1) > max_y || pt_array(1) < min_y || pt_array(0) > max_x || pt_array(0) < min_x)
             return false
           else
             return true
@@ -108,12 +108,10 @@ object SpatialQuery extends App{
       */
     try {
           val pt1_array = pointString1.split(",")
-
           val pt1_x= pt1_array(0).trim.toDouble
           val pt1_y= pt1_array(1).trim.toDouble
       
           val pt2_array = pointString2.split(",")
-
           val pt2_x=pt2_array(0).trim.toDouble
           val pt2_y=pt2_array(1).trim.toDouble
           
