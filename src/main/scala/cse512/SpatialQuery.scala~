@@ -66,7 +66,7 @@ object SpatialQuery extends App{
   }
 
   def Contains_function(queryRectangle:String, pointString:String):Boolean={
-    /** Returns true if pointString1 lies inside or on the boundary of queryRectangle
+    /** Returns true if pointString1 lies inside or on hte boundary of queryRectangle
       *
       *@param queryRectangle diagonal point co-ordinates of the rectangle
       *@param pointString x and y co-ordinates of the point
